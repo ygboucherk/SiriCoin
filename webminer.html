@@ -7,15 +7,15 @@
   </head>
   <body>
     <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+	<script src="miner.js"></script>
     <section>
       <div class="box">
         <h1>SiriCoin WebMiner</h1>
-        <p><br>this is my new project.<br><br> on which currently im working on</p>
-
-
+		<input id="addressInput" placeholder="Input your polygon address..."></input>
+		<button onclick="startMining(document.getElementById('addressInput').value)">Start mining</button>
+		<button onclick="stopMining()">Stop mining</button>
 
       </div>
     </section>
-
   </body>
 </html>
