@@ -1,0 +1,37 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+section{
+  padding: 0 100px;
+  background: url(banners/banner1.jpg);
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+.box{
+  position: relative; 
+  max-width: 1000px;
+  padding: 350px;
+  max-height: 100px;
+  padding-right: 1000px;
+  background: rgba(255,255,255,.2);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+.box h1{
+  margin: 10px 0 20px;
+  padding: 10px;
+  font-size: 48px;
+  text-transform: capitalize;
+  color: #fff;
+}
+.box p{
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  text-transform: capitalize;
+  color: #fff;
+}
