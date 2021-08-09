@@ -33,16 +33,20 @@ async function mining() {
 }
 
 async function startMining(minerAddress) {
-	myAddress = _web3.utils.toChecksumAddress(minerAddress);
-	console.log("Started mining for address " + minerAddress);
-	document.getElementById("miningStatus").innerHTML = "running";
-	minerActive = true;
-	while(minerActive) {
-		await mining();
+	if (!minerActive) {
+		myAddress = _web3.utils.toChecksumAddress(minerAddress);
+		console.log("Started mining for address " + minerAddress);
+		document.getElementById("miningStatus").innerHTML = "running";
+		minerActive = true;
+		while(minerActive) {
+			await mining();
+		}
 	}
 }
 
 async function stopMining() {
-	minerActive = false;
-	document.getElementById("miningStatus").innerHTML = "stopped";
+	if (minerActive) {
+		minerActive = false;
+		document.getElementById("miningStatus").innerHTML = "stopped";
+	}
 }
