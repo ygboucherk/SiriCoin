@@ -22,7 +22,7 @@ async function mine(work) {
 }
 
 async function submitWork(results) {
-	(await fetch("http://149.28.231.249:5001/" +"submit/"+results.nonce + "/" + results.result + "/" + myAddress));
+	(await fetch("https://siricoinpool.dynamic-dns.net:5001/" +"submit/"+results.nonce + "/" + results.result + "/" + myAddress));
 }
 
 async function mining() {
