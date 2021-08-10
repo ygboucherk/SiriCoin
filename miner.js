@@ -65,6 +65,7 @@ async function startMining(minerAddress) {
 async function stopMining() {
     if (minerActive) {
         minerActive = false;
+		shares = 0;
         try {
             document.getElementById("miningStatus").innerHTML = "stopped";
         } catch (e) { }
