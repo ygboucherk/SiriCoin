@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+  <title>WebMiner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+  <script src="miner.js"></script>
+  <section>
+    <div class="box">
+      <h1>SiriCoin WebMiner</h1>
+      <input id="addressInput" placeholder="Input your polygon address..."></input>
+      <button id="Start" onclick="startMining(document.getElementById('addressInput').value)">Start Mining</button>
+      <button id="Stop" onclick="stopMining()">Stop Mining</button><br />
+      <span class="status">Mining Status :</span>  <span id="miningStatus">Stopped
+    </div>
+
+  </section>
+
+  <footer class="footer-padding 3rem 3rem 6rem">
+    <div class="content">
+      <p id="foot">
+        <strong>SiriCoin</strong> by <a href="https://github.com/Sanjaysandy"><strong>Sanjay</strong></a>&<a
+          href="https://github.com/ygboucherk"><strong>Yanis.</strong></a> The source code is licensed
+        <a href="http://opensource.org/licenses/mit-license.php"><strong class="mit">MIT-License.</strong></a> The website content
+        is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><strong class="lin">CC BY NC SA 4.0.</strong></a>
+      </p>
+    </div>
+  </footer>
+
+
+
+</body>
+
+</html>
