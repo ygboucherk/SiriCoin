@@ -1,0 +1,1 @@
+https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js
