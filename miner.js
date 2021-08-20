@@ -8,7 +8,7 @@ w.onmessage = function(event) {
 
 function startMining(_address) {
 	if (!minerActive) {
-		w = new Worker("miner.js");
+		w = new Worker("miningWorker.js");
 		w.postMessage(_address);
 	}
 }
