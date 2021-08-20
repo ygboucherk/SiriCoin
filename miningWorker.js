@@ -18,6 +18,7 @@ async function mine(work) {
 	hashes = 0
 	begin = Date.now();
     while (BigInt(_web3.utils.keccak256(_web3.utils.keccak256(_web3.utils.encodePacked(work.challenge, myAddress, nonce)))) > BigInt(work.target)) {
+		console.log(_web3.utils.keccak256(_web3.utils.keccak256(_web3.utils.encodePacked(work.challenge, myAddress, nonce))))
         nonce = Math.floor((Math.random() * 1000000));
 		hashes += 1;
     }
@@ -25,7 +26,7 @@ async function mine(work) {
     returnValue = {};
     returnValue["nonce"] = nonce;
     returnValue["result"] = _web3.utils.keccak256(_web3.utils.keccak256(_web3.utils.encodePacked(work.challenge, myAddress, nonce)));
-	returnValue["hashrate"] = hashes/((end-begin)/1000)
+	returnValue["hashrate"] = hashes/((end-begin)/1000);
     return (returnValue);
 }
 
@@ -59,12 +60,11 @@ function addShare(hashrate) {
 }
 
 async function _startMining(minerAddress) {
-	addShare(0);
 	if (!minerActive) {
 		myAddress = _web3.utils.toChecksumAddress(minerAddress);
 		console.log("Started mining for address " + minerAddress);
 		try {
-			postMessage("running");
+			addShare(0);
 		} catch (e) {}
 		minerActive = true;
 		while(minerActive) {
