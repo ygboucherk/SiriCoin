@@ -64,7 +64,7 @@ function addShare(hashrate) {
 
 function updateHashrate(hashrate) {
 	try {
-		postMessage(shares + "," hashrate);
+		postMessage(shares + "," + hashrate);
 	} catch (e) {}
 }	
 

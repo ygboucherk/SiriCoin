@@ -6,8 +6,8 @@ function threadsStatus(threadNumber, data) {
 	_hashrate = data.split(",")[1]
 	shares = 0;
 	hashrate = 0;
+	i = 0;
 	while (i < threads.length) {
-		i += 1;
 		if (i == threadNumber) {
 			shares += _shares;
 			hashrate += _hashrate;
@@ -18,6 +18,7 @@ function threadsStatus(threadNumber, data) {
 			shares += threads[i].shares;
 			hashrate += threads[i].hashrate;
 		}
+		i += 1;
 	}
 	setMinerStatus("running - " + shares + " shares accepted - " + hashrate + " h/s");
 }
@@ -32,12 +33,12 @@ function startMining(_address) {
 			minerActive = true;
 			i = 0;
 			while (i < navigator.hardwareConcurrency) {
-				i += 1;
 				threads[i] = new Worker("miningWorker.js");
 				threads[i].onmessage = function(event) {
 					threadsStatus(i, event.data);
 				};
 				threads[i].postMessage(_address);
+				i += 1;
 			}
 		}
 		else {
@@ -48,8 +49,8 @@ function startMining(_address) {
 
 function stopMining() {
 	while (i < threads.length) {
-		i += 1;
 		threads[i].terminate();
+		i += 1;
 	}
 	minerActive = false;
 	setMinerStatus("Stopped");
