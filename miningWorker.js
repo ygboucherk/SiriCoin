@@ -37,7 +37,7 @@ async function mining() {
 	returnValue = {};
 	try {
 		work = (await getWork());
-		console.log("Got job - challenge : ", work.challenge);
+		console.log("Got job - challenge : " + work.challenge);
 		_results = (await mine(work));
 		returnValue["feedback"] = await submitWork(_results);
 	} catch (e) { returnValue["feedback"] = "Bad"; }
