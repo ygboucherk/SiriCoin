@@ -47,7 +47,7 @@ function addShare() {
 	}
 }
 
-async function startMining(minerAddress) {
+async function _startMining(minerAddress) {
 	if (!minerActive) {
 		myAddress = _web3.utils.toChecksumAddress(minerAddress);
 		console.log("Started mining for address " + minerAddress);
@@ -64,7 +64,7 @@ async function startMining(minerAddress) {
 	}
 }
 
-async function stopMining() {
+async function _stopMining() {
     if (minerActive) {
         minerActive = false;
 		shares = 0;
@@ -75,5 +75,5 @@ async function stopMining() {
 }
 
 onmessage = function(e) {
-	startMining(e.data);
+	_startMining(e.data);
 };
