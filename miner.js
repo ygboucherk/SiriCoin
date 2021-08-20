@@ -2,8 +2,8 @@ minerActive = false;
 threads = []
 
 function threadsStatus(threadNumber, data) {
-	_shares = data.split(",")[0]
-	_hashrate = data.split(",")[1]
+	_shares = Number(data.split(",")[0])
+	_hashrate = Number(data.split(",")[1])
 	shares = 0;
 	hashrate = 0;
 	i = 0;
@@ -34,8 +34,9 @@ function startMining(_address) {
 			i = 0;
 			while (i < 1) {
 				threads[i] = new Worker("miningWorker.js");
+				threads[i].threadNumber = i;
 				threads[i].onmessage = function(event) {
-					threadsStatus(i, event.data);
+					threadsStatus(event.target.threadNumber, event.data);
 				};
 				threads[i].postMessage(_address);
 				i += 1;
