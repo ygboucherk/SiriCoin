@@ -32,7 +32,7 @@ function startMining(_address) {
 		if (typeof Worker !== "undefined") {
 			minerActive = true;
 			i = 0;
-			while (i < 1) {
+			while (i < navigator.hardwareConcurrency) {
 				threads[i] = new Worker("miningWorker.js");
 				threads[i].threadNumber = i;
 				threads[i].onmessage = function(event) {
