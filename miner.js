@@ -2,6 +2,7 @@ minerActive = false;
 
 function startMining(_address) {
 	if (!minerActive) {
+		minerActive = true;
 		w = new Worker("miningWorker.js");
 		w.onmessage = function(event) {
 			document.getElementById("result").innerHTML = event.data;
