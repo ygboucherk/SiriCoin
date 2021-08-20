@@ -18,7 +18,6 @@ async function mine(work) {
 	hashes = 0
 	begin = Date.now();
     while (BigInt(_web3.utils.keccak256(_web3.utils.keccak256(_web3.utils.encodePacked(work.challenge, myAddress, nonce)))) > BigInt(work.target)) {
-		console.log(_web3.utils.keccak256(_web3.utils.keccak256(_web3.utils.encodePacked(work.challenge, myAddress, nonce))))
         nonce = Math.floor((Math.random() * 1000000));
 		hashes += 1;
 		if (hashes%10000 == 0) {
