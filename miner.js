@@ -1,12 +1,11 @@
 minerActive = false;
 
-w.onmessage = function(event) {
-	document.getElementById("result").innerHTML = event.data;
-};
-
 function startMining(_address) {
 	if (!minerActive) {
 		w = new Worker("miningWorker.js");
+		w.onmessage = function(event) {
+			document.getElementById("result").innerHTML = event.data;
+		};
 		w.postMessage(_address);
 	}
 }
