@@ -1,5 +1,3 @@
-w = new Worker("miner.js");
-
 minerActive = false;
 
 w.onmessage = function(event) {
