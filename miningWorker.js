@@ -51,7 +51,7 @@ async function mining() {
 function addShare(hashrate) {
 	shares += 1;
 	try {
-		postMessage("running - " + shares + " shares accepted - " hashrate + " h/s");
+		postMessage("running - " + shares + " shares accepted - " + hashrate + " h/s");
 	}
 	catch (e) {
 		
