@@ -47,7 +47,10 @@ function startMining(_address) {
 }
 
 function stopMining() {
-	w.terminate();
+	while (i < threads.length) {
+		i += 1;
+		threads[i].terminate();
+	}
 	minerActive = false;
 	setMinerStatus("Stopped");
 }
