@@ -1,4 +1,26 @@
 minerActive = false;
+threads = []
+
+function threadsStatus(threadNumber, data) {
+	_shares = data.split(",")[0]
+	_hashrate = data.split(",")[1]
+	shares = 0;
+	hashrate = 0;
+	while (i < threads.length) {
+		i += 1;
+		if (i == threadNumber) {
+			shares += _shares;
+			hashrate += _hashrate;
+			threads[i].hashrate = _hashrate;
+			threads[i].shares = _shares;
+		}
+		else {
+			shares += threads[i].shares;
+			hashrate += threads[i].hashrate;
+		}
+	}
+	setMinerStatus("running - " + shares + " shares accepted - " + hashrate + " h/s");
+}
 
 function setMinerStatus(status) {
 	document.getElementById("miningstatus").innerHTML = status;
@@ -8,11 +30,15 @@ function startMining(_address) {
 	if (!minerActive) {
 		if (typeof Worker !== "undefined") {
 			minerActive = true;
-			w = new Worker("miningWorker.js");
-			w.onmessage = function(event) {
-				setMinerStatus(event.data);
-			};
-			w.postMessage(_address);
+			i = 0;
+			while (i < navigator.hardwareConcurrency) {
+				i += 1;
+				threads[i] = new Worker("miningWorker.js");
+				threads[i].onmessage = function(event) {
+					threadsStatus(i, event.data);
+				};
+				threads[i].postMessage(_address);
+			}
 		}
 		else {
 			setMinerStatus("Error: WebWorker isn't supported on this browser");
