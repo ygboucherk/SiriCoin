@@ -5,7 +5,7 @@ function startMining(_address) {
 		minerActive = true;
 		w = new Worker("miningWorker.js");
 		w.onmessage = function(event) {
-			document.getElementById("result").innerHTML = event.data;
+			document.getElementById("miningStatus").innerHTML = event.data;
 		};
 		w.postMessage(_address);
 	}
@@ -13,6 +13,6 @@ function startMining(_address) {
 
 function stopMining() {
 	w.terminate();
-	document.getElementById("result").innerHTML = "stopped";
+	document.getElementById("miningStatus").innerHTML = "stopped";
 	minerActive = false;
 }
