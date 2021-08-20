@@ -22,6 +22,6 @@ function startMining(_address) {
 
 function stopMining() {
 	w.terminate();
-	setMinerStatus("Stopped");
 	minerActive = false;
+	setMinerStatus("Stopped");
 }
