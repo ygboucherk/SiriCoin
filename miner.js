@@ -25,6 +25,7 @@ function threadsStatus(threadNumber, data) {
 		i += 1;
 	}
 	setMinerStatus("running - " + shares + " shares accepted - " + hashrate + " h/s" + "<br/>Number of threads : " + threads.length);
+	refreshBalance();
 }
 
 function setMinerStatus(status) {
