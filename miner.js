@@ -24,7 +24,7 @@ function threadsStatus(threadNumber, data) {
 		}
 		i += 1;
 	}
-	setMinerStatus("running - " + shares + " shares accepted - " + hashrate + " h/s" + "<br/>Number of threads : " + threads.length);
+	setMinerStatus("running - " + shares + " shares accepted - " + Math.round(hashrate*100)/100 + " h/s" + "<br/>Number of threads : " + threads.length);
 	refreshBalance();
 }
 
@@ -37,7 +37,7 @@ function showRecommendedThreads() {
 }
 
 async function refreshBalance() {
-	document.getElementById("currentbalance").innerHTML = ((await _token.methods.balanceOf(currentAddress).call())/(10**18)) + " SiriCoin";
+	document.getElementById("currentbalance").innerHTML = Math.round((await _token.methods.balanceOf(currentAddress).call())/(10**16))/100 + " SiriCoin";
 }
 
 function startMining(_address, _threads) {
