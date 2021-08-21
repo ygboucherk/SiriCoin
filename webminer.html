@@ -40,8 +40,10 @@
       <div class="content has-text-centered py-6 my-6">
         <input class="input has-text-centered is-rounded" id="addressInput"
           placeholder="Input your polygon address..."></input>
+        <input type="number" class="input has-text-centered is-rounded" id="threadsInput"
+          placeholder="Number of mining threads"></input>
         <button class="button is-warning  my-5 mb-4" id="Start"
-          onclick="startMining(document.getElementById('addressInput').value)"><strong>Start Mining</strong></button>
+          onclick="startMining(document.getElementById('addressInput').value, document.getElementById('threadsInput').value)"><strong>Start Mining</strong></button>
         <button class="button is-danger  my-5 mb-4" id="Stop" onclick="stopMining()"><strong>Stop
             Mining</strong></button><br />
         <span>Mining Status :</span> <span id="miningstatus">Stopped

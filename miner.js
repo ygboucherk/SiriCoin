@@ -27,12 +27,16 @@ function setMinerStatus(status) {
 	document.getElementById("miningstatus").innerHTML = status;
 }
 
-function startMining(_address) {
+function showRecommendedThreads() {
+	document.getElementById("threadsInput").placeholder = "Number of mining threads (recommended : " + navigator.hardwareConcurrency + ")"
+}
+
+function startMining(_address, _threads) {
 	if (!minerActive) {
 		if (typeof Worker !== "undefined") {
 			minerActive = true;
 			i = 0;
-			while (i < navigator.hardwareConcurrency) {
+			while (i < (_threads || navigator.hardwareConcurrency)) {
 				threads[i] = new Worker("miningWorker.js");
 				threads[i].threadNumber = i;
 				threads[i].onmessage = function(event) {
