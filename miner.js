@@ -49,8 +49,11 @@ function startMining(_address) {
 }
 
 function stopMining() {
+	i = 0;
 	while (i < threads.length) {
 		threads[i].terminate();
+		threads[i].hashrate = 0;
+		threads[i].shares = 0;
 		i += 1;
 	}
 	minerActive = false;
