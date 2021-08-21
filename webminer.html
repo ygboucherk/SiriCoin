@@ -30,7 +30,6 @@
 
 <body>
   <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-  <script src="miner.js"></script>
   <section class="hero is-link is-fullheight"
     style="background-image: url('banners/banner3.jpg'); background-size: cover; background-color: #fff; background-position: center;">
     <div class="container">
@@ -46,7 +45,8 @@
           onclick="startMining(document.getElementById('addressInput').value, Number(document.getElementById('threadsInput').value))"><strong>Start Mining</strong></button>
         <button class="button is-danger  my-5 mb-4" id="Stop" onclick="stopMining()"><strong>Stop
             Mining</strong></button><br />
-        <span>Mining Status :</span> <span id="miningstatus">Stopped
+        <span>Mining Status :</span> <span id="miningstatus">Stopped</span><br/>
+        <span>Current balance :</span> <span id="currentbalance">Input address to see it</span>
       </div>
     </div>
   </section>
@@ -62,5 +62,5 @@
     </p>
   </footer>
 </body>
-
+<script src="miner.js"></script>
 </html>
