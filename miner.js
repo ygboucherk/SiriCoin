@@ -63,3 +63,5 @@ function stopMining() {
 	minerActive = false;
 	setMinerStatus("Stopped");
 }
+
+showRecommendedThreads();
