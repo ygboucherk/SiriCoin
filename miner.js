@@ -12,6 +12,7 @@ function threadsStatus(threadNumber, data) {
 	threads[threadNumber].hashrate = Number(data.split(",")[1]);
 	i = 0;
 	hashrate = 0;
+	shares = 0;
 	while (i < threads.length) {
 		hashrate += threads[i].hashrate;
 		shares += threads[i].shares;
