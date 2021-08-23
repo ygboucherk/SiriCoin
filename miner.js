@@ -4,24 +4,17 @@ _token = new _web3.eth.Contract([{ "anonymous": false, "inputs": [{ "indexed": t
 currentAddress = "";
 minerActive = false;
 threads = []
+shares = 0;
+hashrate = 0;
 
 function threadsStatus(threadNumber, data) {
-	_shares = Number(data.split(",")[0])
-	_hashrate = Number(data.split(",")[1])
-	shares = 0;
-	hashrate = 0;
+	threads[threadNumber].shares = Number(data.split(",")[0]);
+	threads[threadNumber].hashrate = Number(data.split(",")[1]);
 	i = 0;
+	hashrate = 0;
 	while (i < threads.length) {
-		if (i == threadNumber) {
-			shares += _shares;
-			hashrate += _hashrate;
-			threads[i].hashrate = _hashrate;
-			threads[i].shares = _shares;
-		}
-		else {
-			shares += threads[i].shares;
-			hashrate += threads[i].hashrate;
-		}
+		hashrate += threads[i].hashrate;
+		shares += threads[i].shares;
 		i += 1;
 	}
 	setMinerStatus("running - " + shares + " shares accepted - " + Math.round(hashrate*100)/100 + " h/s" + "<br/>Number of threads : " + threads.length);
