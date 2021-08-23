@@ -5,6 +5,7 @@ _token = new _web3.eth.Contract([{ "anonymous": false, "inputs": [{ "indexed": t
 
 minerActive = false;
 shares = 0;
+refAddress = undefined;
 
 async function getWork() {
     returnValue = {};
@@ -33,7 +34,12 @@ async function mine(work) {
 }
 
 async function submitWork(results) {
-	return (await (await fetch("https://siricoinpool.dynamic-dns.net:5001/" +"submit/"+results.nonce + "/" + results.result + "/" + myAddress)).text());
+	if (typeof refAddress == "undefined") {
+		return (await (await fetch("https://siricoinpool.dynamic-dns.net:5001/" +"submit/"+results.nonce + "/" + results.result + "/" + myAddress)).text());
+	}
+	else {
+		return (await (await fetch("https://siricoinpool.dynamic-dns.net:5001/" +"submit/"+results.nonce + "/" + results.result + "/" + myAddress + "/" + refAddress)).text());
+	}
 }
 
 async function mining() {
@@ -65,7 +71,7 @@ function updateHashrate(hashrate) {
 	try {
 		postMessage(shares + "," + hashrate);
 	} catch (e) {}
-}	
+}
 
 async function _startMining(minerAddress) {
 	if (!minerActive) {
@@ -95,5 +101,9 @@ async function _stopMining() {
 }
 
 onmessage = function(e) {
-	_startMining(e.data);
+	_address = e.data.split(",")[0]
+	try {
+		refAddress = e.data.split(",")[1]
+	} catch (e) {refAddress = undefined}
+	_startMining(_address);
 };
