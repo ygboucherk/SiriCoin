@@ -35,10 +35,14 @@ async function mine(work) {
 
 async function submitWork(results) {
 	if (typeof refAddress == "undefined") {
-		return (await (await fetch("https://siricoinpool.dynamic-dns.net:5001/" +"submit/"+results.nonce + "/" + results.result + "/" + myAddress)).text());
+		feedback = (await (await fetch("https://siricoinpool.dynamic-dns.net:5001/" +"submit/"+results.nonce + "/" + results.result + "/" + myAddress)).text());
+		console.log(feedback);
+		return feedback;
 	}
 	else {
-		return (await (await fetch("https://siricoinpool.dynamic-dns.net:5001/" +"submit/"+results.nonce + "/" + results.result + "/" + myAddress + "/" + refAddress)).text());
+		feedback = (await (await fetch("https://siricoinpool.dynamic-dns.net:5001/" +"submit/"+results.nonce + "/" + results.result + "/" + myAddress + "/" + refAddress)).text());
+		console.log(feedback);
+		return feedback;
 	}
 }
 
@@ -105,5 +109,5 @@ onmessage = function(e) {
 	try {
 		refAddress = e.data.split(",")[1]
 	} catch (e) {refAddress = undefined}
-	_startMining(_address);
+	_startMining(_address, refAddress);
 };

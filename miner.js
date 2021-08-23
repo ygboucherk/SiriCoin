@@ -34,6 +34,15 @@ async function refreshBalance() {
 	document.getElementById("currentbalance").innerHTML = Math.round((await _token.methods.balanceOf(currentAddress).call())/(10**16))/100 + " SiriCoin";
 }
 
+function getReferralStuff() {
+	try {
+		return _web3.utils.toChecksumAddress((new URLSearchParams(window.location.search)).get("ref"))
+	}
+	catch (e) {
+		return undefined;
+	}
+}
+
 function startMining(_address, _threads) {
 	try {
 		currentAddress = _web3.utils.toChecksumAddress(_address);
@@ -48,7 +57,7 @@ function startMining(_address, _threads) {
 					threads[i].onmessage = function(event) {
 						threadsStatus(event.target.threadNumber, event.data);
 					};
-					threads[i].postMessage(_address);
+					threads[i].postMessage(_address + "," +referrer);
 					i += 1;
 				}
 			}
