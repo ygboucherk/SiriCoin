@@ -7,6 +7,8 @@ minerActive = false;
 shares = 0;
 refAddress = undefined;
 
+pools = ["https://siricoinpool.dynamic-dns.net:5001/"]
+
 async function getWork() {
     returnValue = {};
     returnValue["target"] = (await _pool.methods.getMiningTarget().call());
@@ -35,12 +37,12 @@ async function mine(work) {
 
 async function submitWork(results) {
 	if (typeof refAddress == "undefined") {
-		feedback = (await (await fetch("https://siricoinpool.dynamic-dns.net:5001/" +"submit/"+results.nonce + "/" + results.result + "/" + myAddress)).text());
+		feedback = (await (await fetch(Math.floor(Math.random()*pools.length) +"submit/"+results.nonce + "/" + results.result + "/" + myAddress)).text());
 		console.log(feedback);
 		return feedback;
 	}
 	else {
-		feedback = (await (await fetch("https://siricoinpool.dynamic-dns.net:5001/" +"submit/"+results.nonce + "/" + results.result + "/" + myAddress + "/" + refAddress)).text());
+		feedback = (await (await fetch(Math.floor(Math.random()*pools.length) +"submit/"+results.nonce + "/" + results.result + "/" + myAddress + "/" + refAddress)).text());
 		console.log(feedback);
 		return feedback;
 	}
