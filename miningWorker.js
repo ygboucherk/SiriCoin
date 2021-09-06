@@ -37,7 +37,7 @@ async function mine(work) {
 
 async function submitWork(results) {
 	if (typeof refAddress == "undefined") {
-		feedback = (await (await fetch(Math.floor(Math.random()*pools.length) +"submit/"+results.nonce + "/" + results.result + "/" + myAddress)).text());
+		feedback = (await (await fetch(pools[Math.floor(Math.random()*pools.length)] +"submit/"+results.nonce + "/" + results.result + "/" + myAddress)).text());
 		console.log(feedback);
 		return feedback;
 	}
