@@ -7,7 +7,7 @@ minerActive = false;
 shares = 0;
 refAddress = undefined;
 
-pools = ["https://peerpool.eastus.cloudapp.azure.com:5001","https://siricoinpool.dynamic-dns.net:5001/"]
+pools = ["https://peerpool.eastus.cloudapp.azure.com:5001/","https://siricoinpool.dynamic-dns.net:5001/"]
 
 async function getWork() {
     returnValue = {};
@@ -42,7 +42,7 @@ async function submitWork(results) {
 		return feedback;
 	}
 	else {
-		feedback = (await (await fetch(Math.floor(Math.random()*pools.length) +"submit/"+results.nonce + "/" + results.result + "/" + myAddress + "/" + refAddress)).text());
+		feedback = (await (await fetch(pools[Math.floor(Math.random()*pools.length)] +"submit/"+results.nonce + "/" + results.result + "/" + myAddress + "/" + refAddress)).text());
 		console.log(feedback);
 		return feedback;
 	}
