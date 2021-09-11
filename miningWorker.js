@@ -13,6 +13,7 @@ async function getWork() {
     returnValue = {};
     returnValue["target"] = (await _pool.methods.getMiningTarget().call());
     returnValue["challenge"] = (await _pool.methods.getChallengeNumber().call());
+    returnValue["difficulty"] = (await _pool.methods.getMiningDifficulty().call());
     return returnValue;
 }
 
@@ -52,14 +53,14 @@ async function mining() {
 	returnValue = {};
 	try {
 		work = (await getWork());
-		console.log("Got job - challenge : " + work.challenge);
+		console.log(`Got job - challenge : ${work.challenge}, difficulty : ${work.difficulty}`);
 		_results = (await mine(work));
 		returnValue["feedback"] = await submitWork(_results);
 	} catch (e) { returnValue["feedback"] = "Bad"; }
 	try {
 		returnValue["hashrate"] = _results["hashrate"];
 	}
-	catch (e) {}
+	catch (e) { console.error(e) }
 	return returnValue;
 }
 
