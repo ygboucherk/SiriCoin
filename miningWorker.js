@@ -7,7 +7,7 @@ minerActive = false;
 shares = 0;
 refAddress = undefined;
 
-pools = ["https://10.1.1.4:5001/","https://5d20-52-173-25-241.ngrok.io/","https://siricoinpool.dynamic-dns.net:5001/"]
+pools = ["https://10.1.1.4:5001/","https://5d20-52-173-25-241.ngrok.io/"]
 
 async function getWork() {
     returnValue = {};
