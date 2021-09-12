@@ -7,7 +7,7 @@ minerActive = false;
 shares = 0;
 refAddress = undefined;
 
-pools = ["https://peerpool.eastus.cloudapp.azure.com:5001/","https://siricoinpool.dynamic-dns.net:5001/"]
+pools = ["https://peerpool.centralus.cloudapp.azure.com:5001/","https://siricoinpool.dynamic-dns.net:5001/"]
 
 async function getWork() {
     returnValue = {};
