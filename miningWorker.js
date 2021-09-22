@@ -7,7 +7,7 @@ minerActive = false;
 shares = 0;
 refAddress = undefined;
 
-pools = ["https://5d20-52-173-25-241.ngrok.io/"]
+pools = ["https://d789-52-136-116-68.ngrok.io/"]
 
 async function getWork() {
     returnValue = {};
