@@ -1,5 +1,5 @@
 # SiriCoin
-Siricoin Official Website Source code. If you want to improve this website please create a pull request..
+Siricoin Official.You can improve this website please create a pull request..
 
 ![siricoinlogo2-removebg-preview](https://user-images.githubusercontent.com/32244577/140254647-fd96fc02-180c-4ea4-ae7b-50b45dd2e660.png)
 
