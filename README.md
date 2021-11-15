@@ -11,4 +11,4 @@ and Blockchain making it easiest beginner friendly coin.
 
 # LeadDevs
 Founder And Creator ==> SanjaySiri
-Lead Devs ==> Mrpeer , Yanis , Shreyas-ITB
+Lead Devs ==> MrPeer , Yanis , Shreyas-ITB , MrBarb
