@@ -1,13 +1,163 @@
 window = {}; // window shall be defined
 importScripts("web3.min.js");
 _web3 = new window.Web3(new window.Web3.providers.HttpProvider("https://speedy-nodes-nyc.moralis.io/81032463e5542d5ab0c32849/polygon/mainnet"));
-_pool = new _web3.eth.Contract([{ "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "tokenOwner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "spender", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "tokens", "type": "uint256" }], "name": "Approval", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "from", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "rewardAmount", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "epochCount", "type": "uint256" }, { "indexed": false, "internalType": "bytes32", "name": "newChallengeNumber", "type": "bytes32" }], "name": "Mint", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "_from", "type": "address" }, { "indexed": true, "internalType": "address", "name": "_to", "type": "address" }], "name": "OwnershipTransferred", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "from", "type": "address" }, { "indexed": true, "internalType": "address", "name": "to", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "tokens", "type": "uint256" }], "name": "Transfer", "type": "event" }, { "inputs": [], "name": "_MAXIMUM_TARGET", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "_MINIMUM_TARGET", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "nonce", "type": "uint256" }, { "internalType": "bytes32", "name": "challenge_digest", "type": "bytes32" }, { "internalType": "address", "name": "_miner", "type": "address" }], "name": "_mint", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "_totalSupply", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "acceptOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "owner", "type": "address" }, { "internalType": "address", "name": "spender", "type": "address" }], "name": "allowance", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "tokens", "type": "uint256" }], "name": "approve", "outputs": [{ "internalType": "bool", "name": "success", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "tokens", "type": "uint256" }, { "internalType": "bytes", "name": "data", "type": "bytes" }], "name": "approveAndCall", "outputs": [{ "internalType": "bool", "name": "success", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "guy", "type": "address" }], "name": "balanceOf", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "baseReward", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "blocktime", "outputs": [{ "internalType": "uint32", "name": "", "type": "uint32" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "calcMiningTarget", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "_difficulty", "type": "uint256" }], "name": "changeDifficulty", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "currentChallenge", "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "decimals", "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "subtractedValue", "type": "uint256" }], "name": "decreaseAllowance", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "epochCount", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "epochLenght", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "getChallengeNumber", "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "getMiningDifficulty", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "getMiningReward", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "getMiningTarget", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "addedValue", "type": "uint256" }], "name": "increaseAllowance", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "minerOfLastBlock", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "miningTarget", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "blockdelay", "type": "uint256" }], "name": "miningTargetForDelay", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "nonce", "type": "uint256" }, { "internalType": "bytes32", "name": "challenge_digest", "type": "bytes32" }], "name": "mint", "outputs": [{ "internalType": "bool", "name": "success", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "name", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "blockdelay", "type": "uint256" }], "name": "netTargetForDelay", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "newOwner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "owner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "symbol", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "timeOfLastProof", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "timeOfLastReadjust", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "totalSupply", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "transfer", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "from", "type": "address" }, { "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "transferFrom", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "_newOwner", "type": "address" }], "name": "transferOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }], "0xE0De8d9df719c0C119ad2f7Ca7f654aD59F2F2d4");
 
 minerActive = false;
 shares = 0;
-refAddress = undefined;
 
-pools = ["https://siricoinpool.dynamic-dns.net:5001/"] 
+
+
+
+
+
+
+
+
+// pools = ["https://siricoinpool.dynamic-dns.net:5001/"] 
+
+
+
+
+
+
+class Wallet {
+	constructor(web3Instance) {
+		this.web3Instance = web3Instance;
+		this.miningAccount = web3.eth.accounts.privateKeyToAccount(web3.utils.soliditySha3((Math.random()*10**17).toFixed()));
+	}
+	
+	convertFromHex(hex) {
+		var hex = hex.toString();//force conversion
+		var str = '';
+		for (var i = 0; i < hex.length; i += 2)
+			str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+		return str;
+	}
+
+	convertToHex(str) {
+		var hex = '';
+		for(var i=0;i<str.length;i++) {
+			hex += ''+str.charCodeAt(i).toString(16);
+		}
+		return hex;
+	}
+	
+	async getAccountInfo(account) {
+		return (await (await fetch(`http://136.244.119.124:5005/accounts/accountInfo/${account}`)).json()).result;
+	}
+
+	async getHeadTx(account) {
+		let accountInfo = (await getAccountInfo(account));
+		return accountInfo.transactions[accountInfo.transactions.length-1];
+	}
+
+	async buildTransaction(to, tokens) {
+		const account = (await this.web3Instance.eth.getAccounts())[0];
+		const parent = (await getHeadTx(account));
+		let data = {"from":account, "to":this.web3Instance.utils.toChecksumAddress(to), "tokens":tokens, "parent": parent, "type": 0};
+		let strdata = JSON.stringify(data);
+		const hash = this.web3Instance.utils.soliditySha3(strdata);
+		const signature = await this.web3Instance.eth.personal.sign(strdata, account);
+		const tx = {"data": data, "sig": signature, "hash": hash, "nodeSigs": {}};
+		return this.convertToHex(JSON.stringify(tx));
+	}
+	
+	async buildMiningTransaction(submittedBlock) {
+		const account = (await this.web3Instance.eth.getAccounts())[0];
+		const parent = (await getHeadTx(this.miningAccount.address));
+		let data = {"from":this.miningAccount.address, "to":this.miningAccount.address, "tokens":0, "blockData": submittedBlock, "parent": parent, "type": 1};
+		let strdata = JSON.stringify(data);
+		const hash = this.web3Instance.utils.soliditySha3(strdata);
+		const signature = await this.miningAccount.sign(strdata).signature;
+		const tx = {"data": data, "sig": signature, "hash": hash, "nodeSigs": {}};
+		return this.convertToHex(JSON.stringify(tx));
+	}
+
+	async sendTransaction(signedTx) {
+		console.log(signedTx);
+		return (await (await fetch(`http://136.244.119.124:5005/send/rawtransaction/?tx=${signedTx}`)).json()).result;
+	}
+	
+	async getTransactionDetails(txid) {
+		const result = (await (await fetch(`http://136.244.119.124:5005/get/transactions/{txid}`)).json()).result;
+		if result.length > 0 {
+			return result[0];
+		}
+		else {
+			return false;
+		}
+	}
+	
+	getVrs(sig) {
+		return (('0x' + sig.substring(2).substring(128, 130)), ('0x' + sig.substring(2).substring(0, 64)), ('0x' + sig.substring(2).substring(64, 128)))
+	}
+}
+
+class Miner {
+	constructor(node) {
+		this.node = node;
+		this.clock = (new Date());
+		this.web3 = new Web3(window.ethereum);
+		this.wallet = new Wallet(this.web3);
+		this.accounts = window.ethereum.enable();
+		// "localhost:5005"
+	}
+	
+	convertToHex(str) {
+		var hex = '';
+		for(var i=0;i<str.length;i++) {
+			hex += ''+str.charCodeAt(i).toString(16);
+		}
+		return hex;
+	}
+	
+	getHashToMine(context) {
+		let messagesHash = web3.utils.soliditySha3({"t": "bytes", "v": context.messages});
+		return web3.utils.soliditySha3({"t": "bytes32", "v": context.parent}, {"t": "uint256", "v": context.timestamp}, {"t": "bytes32", "v": messagesHash}, {"t": "address", "v": context.miningData.miner});
+		// target (uint256), parent (bytes32), timestamp (uint256)
+	}
+
+	async getLastBlockHash() {
+		return (await (await fetch(`${this.node}/chain/getlastblock`)).json()).result.miningData.proof;
+	}
+	
+	async getMiningInfo() {
+		console.log(`${this.node}/chain/miningInfo`);
+		return (await (await fetch(`${this.node}/chain/miningInfo`)).json()).result;
+	}
+	
+	async mine() {
+		const miningInfo = await this.getMiningInfo();
+		let miningData = {"difficulty": miningInfo.difficulty, "miningTarget": miningInfo.target, "miner": (await this.web3.eth.getAccounts())[0], "nonce": (0).toFixed(), "proof": ""}
+		let context = {"messages": this.convertToHex("null"), "target": miningInfo.target, "parent": miningInfo.lastBlockHash, "timestamp": (this.clock.getTime()/1000).toFixed(), "miningData": miningData}
+		
+		const hashToMine = this.getHashToMine(context);
+		console.log(`Hash to mine with : ${hashToMine}`);
+		let hash = "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff";
+		let nonce = 0;
+		while (BigInt(hash) >= BigInt(miningInfo.target)) {
+			nonce += 1;
+			hash = this.web3.utils.soliditySha3({"t": "bytes32", "v": hashToMine}, {"t": "uint256", "v": nonce.toFixed()})
+		}
+		context.miningData.proof = hash;
+		console.log(hash);
+		console.log(miningInfo.target);
+		context.miningData.nonce = nonce;
+		return context;
+	}
+	
+	async mineABlock() {
+		await this.accounts; // mining only starts once metamask window loaded
+		return (await this.wallet.sendTransaction(await this.wallet.buildMiningTransaction(await this.mine())));
+	}
+	
+	async mineForever() {
+		await this.accounts; // mining only starts once metamask window loaded
+		while (true) {
+			console.log(await this.wallet.sendTransaction(await this.wallet.buildMiningTransaction(await this.mine())));
+		}
+	}
+}
 
 async function getWork() {
     returnValue = {};
@@ -17,14 +167,14 @@ async function getWork() {
     return returnValue;
 }
 
-async function mine(work) {
+async function mine() {
     nonce = 0
 	hashes = 0
 	begin = Date.now();
-    while (BigInt(_web3.utils.keccak256(_web3.utils.keccak256(_web3.utils.encodePacked(work.challenge, myAddress, nonce)))) > BigInt(work.target)) {
-        nonce = Math.floor((Math.random() * 1000000000000000));
-		hashes += 1;
-		if (hashes%10000 == 0) {
+	while (BigInt(hash) >= BigInt(miningInfo.target)) {
+		nonce += 1;
+		hash = this.web3.utils.soliditySha3({"t": "bytes32", "v": hashToMine}, {"t": "uint256", "v": nonce.toFixed()})
+		if (nonce%10000 == 0) {
 			updateHashrate(hashes/((Date.now()-begin)/1000))
 		}
     }
@@ -64,6 +214,9 @@ async function mining() {
 	return returnValue;
 }
 
+miner = Miner("http://136.244.119.124:5005/")
+
+
 function addShare(hashrate) {
 	shares += 1;
 	try {
@@ -89,8 +242,8 @@ async function _startMining(minerAddress) {
 		} catch (e) {}
 		minerActive = true;
 		while(minerActive) {
-			feedback = (await mining());
-			if (feedback.feedback == "Good") {
+			feedback = (await mineABlock())[0];
+			if (await getTransactionDetails(feedback)) {
 				addShare(feedback.hashrate);
 			}
 		}
