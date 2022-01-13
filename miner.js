@@ -70,7 +70,7 @@ class Wallet {
 	}
 }
 
-wallet = Wallet(_web3);
+wallet = new Wallet(_web3);
 
 function threadsStatus(threadNumber, data) {
 	threads[threadNumber].shares = Number(data.split(",")[0]);
@@ -96,7 +96,7 @@ function showRecommendedThreads() {
 }
 
 async function refreshBalance() {
-	document.getElementById("currentbalance").innerHTML = Math.round((await wallet.getAccountInfo(currentAddress).balance + " SiriCoin";
+	document.getElementById("currentbalance").innerHTML = Math.round((await wallet.getAccountInfo(currentAddress).balance)) + " SiriCoin";
 }
 
 function startMining(_address, _threads) {

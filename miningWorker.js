@@ -214,7 +214,7 @@ async function mining() {
 	return returnValue;
 }
 
-miner = Miner("http://136.244.119.124:5005/")
+miner = new Miner("http://136.244.119.124:5005/")
 
 
 function addShare(hashrate) {
