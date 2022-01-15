@@ -138,20 +138,25 @@ class Miner {
 		console.log(`Hash to mine with : ${hashToMine}`);
 		let hash = "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff";
 		let nonce = 0;
+		const begin = Date.now();
 		while (BigInt(hash) >= BigInt(miningInfo.target)) {
 			nonce += 1;
 			hash = this.web3.utils.soliditySha3({"t": "bytes32", "v": hashToMine}, {"t": "uint256", "v": nonce.toFixed()})
 		}
+		const end = Date.now();
+		
 		context.miningData.proof = hash;
 		console.log(hash);
 		console.log(miningInfo.target);
 		context.miningData.nonce = nonce;
+		context.miningData.hashrate = (nonce / ((end - begin)/1000));
 		return context;
 	}
 	
 	async mineABlock(minerAddress) {
 		// await this.accounts; // mining only starts once metamask window loaded
-		return (await this.wallet.sendTransaction(await this.wallet.buildMiningTransaction(await this.mine(minerAddress))));
+		const _miningResult = (await this.mine(minerAddress));
+		return ((await this.wallet.sendTransaction(await this.wallet.buildMiningTransaction(_miningResult))), _miningResult.miningData.hashrate);
 	}
 	
 	async mineForever(minerAddress) {
@@ -245,9 +250,9 @@ async function _startMining(minerAddress) {
 		} catch (e) {}
 		minerActive = true;
 		while(minerActive) {
-			feedback = (await miner.mineABlock(myAddress))[0];
-			if (await miner.wallet.getTransactionDetails(feedback)) {
-				addShare(feedback.hashrate);
+			feedback = (await miner.mineABlock(myAddress));
+			if (await miner.wallet.getTransactionDetails(feedback[0])) {
+				addShare(feedback[1]);
 			}
 		}
 	}
