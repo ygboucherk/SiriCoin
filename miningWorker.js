@@ -234,7 +234,7 @@ miner = new Miner("https://siricoin-node-1.dynamic-dns.net:5005")
 function addShare(hashrate) {
 	shares += 1;
 	try {
-		postMessage(shares + "," + hashrate);
+		postMessage(shares + "," + hashrate + ",1");
 	}
 	catch (e) {
 		
@@ -243,7 +243,7 @@ function addShare(hashrate) {
 
 function updateHashrate(hashrate) {
 	try {
-		postMessage(shares + "," + hashrate);
+		postMessage(shares + "," + hashrate + ",0");
 	} catch (e) {}
 }
 
@@ -259,11 +259,7 @@ async function _startMining(minerAddress) {
 		minerActive = true;
 		while(minerActive) {
 			feedback = (await miner.mineABlock(myAddress));
-			_ghewufqufguiqa = (await miner.wallet.getTransactionDetails(feedback[0][0]));
-			console.log(_ghewufqufguiqa);
-			if (_ghewufqufguiqa) {
-				addShare(feedback[1]);
-			}
+			addShare(feedback[1]);
 		}
 	}
 }

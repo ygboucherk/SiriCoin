@@ -71,6 +71,8 @@ class Wallet {
 }
 
 wallet = new Wallet(_web3);
+lastBalanceRefresh = 0;
+
 
 function threadsStatus(threadNumber, data) {
 	threads[threadNumber].shares = Number(data.split(",")[0]);
@@ -84,7 +86,9 @@ function threadsStatus(threadNumber, data) {
 		i += 1;
 	}
 	setMinerStatus(`running - ${shares} shares accepted - ${Math.round(hashrate*100)/100} h/s <br/>Number of threads : ${threads.length}`);
-	refreshBalance();
+	if (Number(data.split(",")[2]) == 1) {
+		refreshBalance();
+	}
 }
 
 function setMinerStatus(status) {
@@ -95,8 +99,14 @@ function showRecommendedThreads() {
 	document.getElementById("threadsInput").placeholder = `Number of mining threads (recommended : ${navigator.hardwareConcurrency})`
 }
 
+async function getBalance() {
+	if Date.now() -	lastBalanceRefresh > 15000 {
+		_balance_ = (await wallet.getAccountInfo(currentAddress)).balance;
+	}
+}
+
 async function refreshBalance() {
-	document.getElementById("currentbalance").innerHTML = Math.round((await wallet.getAccountInfo(currentAddress)).balance) + " SiriCoin";
+	document.getElementById("currentbalance").innerHTML = Math.round(await getBalance()) + " SiriCoin";
 }
 
 function startMining(_address, _threads) {
