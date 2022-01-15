@@ -83,7 +83,7 @@ function threadsStatus(threadNumber, data) {
 		shares += threads[i].shares;
 		i += 1;
 	}
-	setMinerStatus("running - " + shares + " shares accepted - " + Math.round(hashrate*100)/100 + " h/s" + "<br/>Number of threads : " + threads.length);
+	setMinerStatus(`running - ${shares} shares accepted - ${Math.round(hashrate*100)/100} h/s <br/>Number of threads : ${threads.length}`);
 	refreshBalance();
 }
 
@@ -92,11 +92,11 @@ function setMinerStatus(status) {
 }
 
 function showRecommendedThreads() {
-	document.getElementById("threadsInput").placeholder = "Number of mining threads (recommended : " + navigator.hardwareConcurrency + ")"
+	document.getElementById("threadsInput").placeholder = `Number of mining threads (recommended : ${navigator.hardwareConcurrency})`
 }
 
 async function refreshBalance() {
-	document.getElementById("currentbalance").innerHTML = Math.round((await wallet.getAccountInfo(currentAddress).balance)) + " SiriCoin";
+	document.getElementById("currentbalance").innerHTML = Math.round((await wallet.getAccountInfo(currentAddress)).balance) + " SiriCoin";
 }
 
 function startMining(_address, _threads) {

@@ -102,6 +102,7 @@ class Miner {
 		this.clock = (new Date());
 		this.web3 = new window.Web3();
 		this.wallet = new Wallet(this.web3);
+		this.handleHashrate = function(hashrate) {};
 		// "localhost:5005"
 	}
 	
@@ -141,7 +142,10 @@ class Miner {
 		const begin = Date.now();
 		while (BigInt(hash) >= BigInt(miningInfo.target)) {
 			nonce += 1;
-			hash = this.web3.utils.soliditySha3({"t": "bytes32", "v": hashToMine}, {"t": "uint256", "v": nonce.toFixed()})
+			hash = this.web3.utils.soliditySha3({"t": "bytes32", "v": hashToMine}, {"t": "uint256", "v": nonce.toFixed()});
+			if (nonce%10000 == 0) {
+				this.handleHashrate(nonce / (Date.now() - begin));
+			}
 		}
 		const end = Date.now();
 		
@@ -240,6 +244,8 @@ function updateHashrate(hashrate) {
 		postMessage(shares + "," + hashrate);
 	} catch (e) {}
 }
+
+miner.handleHashrate = updateHashrate;
 
 async function _startMining(minerAddress) {
 	if (!minerActive) {
