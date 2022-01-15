@@ -244,8 +244,8 @@ async function _startMining(minerAddress) {
 		} catch (e) {}
 		minerActive = true;
 		while(minerActive) {
-			feedback = (await mineABlock(myAddress))[0];
-			if (await getTransactionDetails(feedback)) {
+			feedback = (await miner.mineABlock(myAddress))[0];
+			if (await miner.wallet.getTransactionDetails(feedback)) {
 				addShare(feedback.hashrate);
 			}
 		}
