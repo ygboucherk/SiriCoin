@@ -129,9 +129,9 @@ class Miner {
 		return (await (await fetch(`${this.node}/chain/miningInfo`)).json()).result;
 	}
 	
-	async mine(miner) {
+	async mine(minerAddress) {
 		const miningInfo = await this.getMiningInfo();
-		let miningData = {"difficulty": miningInfo.difficulty, "miningTarget": miningInfo.target, "miner": miner, "nonce": (0).toFixed(), "proof": ""}
+		let miningData = {"difficulty": miningInfo.difficulty, "miningTarget": miningInfo.target, "miner": minerAddress, "nonce": (0).toFixed(), "proof": ""}
 		let context = {"messages": this.convertToHex("null"), "target": miningInfo.target, "parent": miningInfo.lastBlockHash, "timestamp": (this.clock.getTime()/1000).toFixed(), "miningData": miningData}
 		
 		const hashToMine = this.getHashToMine(context);
