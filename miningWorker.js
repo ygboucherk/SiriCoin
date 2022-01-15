@@ -160,7 +160,7 @@ class Miner {
 	async mineABlock(minerAddress) {
 		// await this.accounts; // mining only starts once metamask window loaded
 		const _miningResult = (await this.mine(minerAddress));
-		return ((await this.wallet.sendTransaction(await this.wallet.buildMiningTransaction(_miningResult))), _miningResult.miningData.hashrate);
+		return [(await this.wallet.sendTransaction(await this.wallet.buildMiningTransaction(_miningResult))), _miningResult.miningData.hashrate];
 	}
 	
 	async mineForever(minerAddress) {
