@@ -142,6 +142,7 @@ function stopMining() {
 		threads[i].shares = 0;
 		i += 1;
 	}
+	threads = []
 	minerActive = false;
 	setMinerStatus("Stopped");
 }

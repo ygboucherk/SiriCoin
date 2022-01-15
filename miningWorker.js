@@ -257,7 +257,7 @@ async function _startMining(minerAddress) {
 		minerActive = true;
 		while(minerActive) {
 			feedback = (await miner.mineABlock(myAddress));
-			_ghewufqufguiqa = (await miner.wallet.getTransactionDetails(feedback[0]));
+			_ghewufqufguiqa = (await miner.wallet.getTransactionDetails(feedback[0][0]));
 			console.log(feedback);
 			console.log(_ghewufqufguiqa);
 			if (_ghewufqufguiqa) {
