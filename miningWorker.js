@@ -84,7 +84,7 @@ class Wallet {
 	
 	async getTransactionDetails(txid) {
 		const result = (await (await fetch(`https://siricoin-node-1.dynamic-dns.net:5005/get/transactions/{txid}`)).json()).result;
-		if (result.length) > 0 {
+		if (result.length > 0) {
 			return result[0];
 		}
 		else {
