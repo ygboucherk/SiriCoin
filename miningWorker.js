@@ -254,7 +254,7 @@ async function _startMining(minerAddress) {
 			_ghewufqufguiqa = (await miner.wallet.getTransactionDetails(feedback[0]));
 			console.log(feedback);
 			console.log(_ghewufqufguiqa);
-			if _ghewufqufguiqa {
+			if (_ghewufqufguiqa) {
 				addShare(feedback[1]);
 			}
 		}
