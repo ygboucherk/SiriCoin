@@ -149,15 +149,15 @@ class Miner {
 		return context;
 	}
 	
-	async mineABlock() {
+	async mineABlock(minerAddress) {
 		// await this.accounts; // mining only starts once metamask window loaded
-		return (await this.wallet.sendTransaction(await this.wallet.buildMiningTransaction(await this.mine(miner))));
+		return (await this.wallet.sendTransaction(await this.wallet.buildMiningTransaction(await this.mine(minerAddress))));
 	}
 	
-	async mineForever() {
+	async mineForever(minerAddress) {
 		// await this.accounts; // mining only starts once metamask window loaded
 		while (true) {
-			console.log(await this.wallet.sendTransaction(await this.wallet.buildMiningTransaction(await this.mine(miner))));
+			console.log(await this.wallet.sendTransaction(await this.wallet.buildMiningTransaction(await this.mine(minerAddress))));
 		}
 	}
 }
