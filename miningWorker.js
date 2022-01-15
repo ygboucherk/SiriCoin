@@ -51,7 +51,7 @@ class Wallet {
 	}
 
 	async getHeadTx(account) {
-		let accountInfo = (await getAccountInfo(account));
+		let accountInfo = (await this.getAccountInfo(account));
 		return accountInfo.transactions[accountInfo.transactions.length-1];
 	}
 
