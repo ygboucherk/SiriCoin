@@ -115,6 +115,7 @@ class Miner {
 	
 	getHashToMine(context) {
 		let messagesHash = this.web3.utils.soliditySha3({"t": "bytes", "v": context.messages});
+		console.log(context.miningData.miner);
 		return this.web3.utils.soliditySha3({"t": "bytes32", "v": context.parent}, {"t": "uint256", "v": context.timestamp}, {"t": "bytes32", "v": messagesHash}, {"t": "address", "v": context.miningData.miner});
 		// target (uint256), parent (bytes32), timestamp (uint256)
 	}
