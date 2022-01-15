@@ -82,7 +82,9 @@ class Wallet {
 	}
 	
 	async getTransactionDetails(txid) {
+		console.log(`https://siricoin-node-1.dynamic-dns.net:5005/get/transactions/{txid}`);
 		const result = (await (await fetch(`https://siricoin-node-1.dynamic-dns.net:5005/get/transactions/{txid}`)).json()).result;
+		console.log(result);
 		if (result.length > 0) {
 			return result[0];
 		}
@@ -258,7 +260,6 @@ async function _startMining(minerAddress) {
 		while(minerActive) {
 			feedback = (await miner.mineABlock(myAddress));
 			_ghewufqufguiqa = (await miner.wallet.getTransactionDetails(feedback[0][0]));
-			console.log(feedback);
 			console.log(_ghewufqufguiqa);
 			if (_ghewufqufguiqa) {
 				addShare(feedback[1]);
