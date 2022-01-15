@@ -82,7 +82,7 @@ class Wallet {
 	}
 	
 	async getTransactionDetails(txid) {
-		console.log(`https://siricoin-node-1.dynamic-dns.net:5005/get/transactions/{txid}`);
+		console.log(`https://siricoin-node-1.dynamic-dns.net:5005/get/transactions/${txid}`);
 		const result = (await (await fetch(`https://siricoin-node-1.dynamic-dns.net:5005/get/transactions/{txid}`)).json()).result;
 		console.log(result);
 		if (result.length > 0) {
