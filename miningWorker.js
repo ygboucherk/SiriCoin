@@ -67,7 +67,6 @@ class Wallet {
 	}
 	
 	async buildMiningTransaction(submittedBlock) {
-		const account = (await this.web3Instance.eth.getAccounts())[0];
 		const parent = (await getHeadTx(this.miningAccount.address));
 		let data = {"from":this.miningAccount.address, "to":this.miningAccount.address, "tokens":0, "blockData": submittedBlock, "parent": parent, "epoch": (await this.getCurrentEpoch()), "type": 1};
 		let strdata = JSON.stringify(data);
@@ -101,9 +100,8 @@ class Miner {
 	constructor(node) {
 		this.node = node;
 		this.clock = (new Date());
-		this.web3 = new window.Web3(window.ethereum);
+		this.web3 = new window.Web3();
 		this.wallet = new Wallet(this.web3);
-		this.accounts = window.ethereum.enable();
 		// "localhost:5005"
 	}
 	
@@ -130,9 +128,9 @@ class Miner {
 		return (await (await fetch(`${this.node}/chain/miningInfo`)).json()).result;
 	}
 	
-	async mine() {
+	async mine(miner) {
 		const miningInfo = await this.getMiningInfo();
-		let miningData = {"difficulty": miningInfo.difficulty, "miningTarget": miningInfo.target, "miner": (await this.web3.eth.getAccounts())[0], "nonce": (0).toFixed(), "proof": ""}
+		let miningData = {"difficulty": miningInfo.difficulty, "miningTarget": miningInfo.target, "miner": miner, "nonce": (0).toFixed(), "proof": ""}
 		let context = {"messages": this.convertToHex("null"), "target": miningInfo.target, "parent": miningInfo.lastBlockHash, "timestamp": (this.clock.getTime()/1000).toFixed(), "miningData": miningData}
 		
 		const hashToMine = this.getHashToMine(context);
@@ -151,14 +149,14 @@ class Miner {
 	}
 	
 	async mineABlock() {
-		await this.accounts; // mining only starts once metamask window loaded
-		return (await this.wallet.sendTransaction(await this.wallet.buildMiningTransaction(await this.mine())));
+		// await this.accounts; // mining only starts once metamask window loaded
+		return (await this.wallet.sendTransaction(await this.wallet.buildMiningTransaction(await this.mine(miner))));
 	}
 	
 	async mineForever() {
-		await this.accounts; // mining only starts once metamask window loaded
+		// await this.accounts; // mining only starts once metamask window loaded
 		while (true) {
-			console.log(await this.wallet.sendTransaction(await this.wallet.buildMiningTransaction(await this.mine())));
+			console.log(await this.wallet.sendTransaction(await this.wallet.buildMiningTransaction(await this.mine(miner))));
 		}
 	}
 }
@@ -190,33 +188,33 @@ async function mine() {
     return (returnValue);
 }
 
-async function submitWork(results) {
-	if (typeof refAddress == "undefined") {
-		feedback = (await (await fetch(pools[Math.floor(Math.random()*pools.length)] +"submit/"+results.nonce + "/" + results.result + "/" + myAddress)).text());
-		console.log(feedback);
-		return feedback;
-	}
-	else {
-		feedback = (await (await fetch(pools[Math.floor(Math.random()*pools.length)] +"submit/"+results.nonce + "/" + results.result + "/" + myAddress + "/" + refAddress)).text());
-		console.log(feedback);
-		return feedback;
-	}
-}
+// async function submitWork(results) {
+	// if (typeof refAddress == "undefined") {
+		// feedback = (await (await fetch(pools[Math.floor(Math.random()*pools.length)] +"submit/"+results.nonce + "/" + results.result + "/" + myAddress)).text());
+		// console.log(feedback);
+		// return feedback;
+	// }
+	// else {
+		// feedback = (await (await fetch(pools[Math.floor(Math.random()*pools.length)] +"submit/"+results.nonce + "/" + results.result + "/" + myAddress + "/" + refAddress)).text());
+		// console.log(feedback);
+		// return feedback;
+	// }
+// }
 
-async function mining() {
-	returnValue = {};
-	try {
-		work = (await getWork());
-		console.log(`Got job - challenge : ${work.challenge}, difficulty : ${work.difficulty}`);
-		_results = (await mine(work));
-		returnValue["feedback"] = await submitWork(_results);
-	} catch (e) { returnValue["feedback"] = "Bad"; }
-	try {
-		returnValue["hashrate"] = _results["hashrate"];
-	}
-	catch (e) { console.error(e) }
-	return returnValue;
-}
+// async function mining() {
+	// returnValue = {};
+	// try {
+		// work = (await getWork());
+		// console.log(`Got job - challenge : ${work.challenge}, difficulty : ${work.difficulty}`);
+		// _results = (await mine(work));
+		// returnValue["feedback"] = await submitWork(_results);
+	// } catch (e) { returnValue["feedback"] = "Bad"; }
+	// try {
+		// returnValue["hashrate"] = _results["hashrate"];
+	// }
+	// catch (e) { console.error(e) }
+	// return returnValue;
+// }
 
 miner = new Miner("https://siricoin-node-1.dynamic-dns.net:5005")
 
@@ -246,7 +244,7 @@ async function _startMining(minerAddress) {
 		} catch (e) {}
 		minerActive = true;
 		while(minerActive) {
-			feedback = (await mineABlock())[0];
+			feedback = (await mineABlock(myAddress))[0];
 			if (await getTransactionDetails(feedback)) {
 				addShare(feedback.hashrate);
 			}
