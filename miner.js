@@ -10,7 +10,7 @@ hashrate = 0;
 class Wallet {
 	constructor(web3Instance) {
 		this.web3Instance = web3Instance;
-		this.miningAccount = web3Instance.eth.accounts.privateKeyToAccount(web3.utils.soliditySha3((Math.random()*10**17).toFixed()));
+		this.miningAccount = web3Instance.eth.accounts.privateKeyToAccount(web3Instance.utils.soliditySha3((Math.random()*10**17).toFixed()));
 	}
 	
 	convertFromHex(hex) {
