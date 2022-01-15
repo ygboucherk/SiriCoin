@@ -43,7 +43,11 @@ class Wallet {
 	}
 	
 	async getAccountInfo(account) {
-		return (await (await fetch(`http://136.244.119.124:5005/accounts/accountInfo/${account}`)).json()).result;
+		return (await (await fetch(`https://siricoin-node-1.dynamic-dns.net:5005/accounts/accountInfo/${account}`)).json()).result;
+	}
+	
+	async getCurrentEpoch() {
+		return (await (await fetch(`https://siricoin-node-1.dynamic-dns.net:5005/chain/getlastblock`)).json()).result.miningData.proof;
 	}
 
 	async getHeadTx(account) {
@@ -54,7 +58,7 @@ class Wallet {
 	async buildTransaction(to, tokens) {
 		const account = (await this.web3Instance.eth.getAccounts())[0];
 		const parent = (await getHeadTx(account));
-		let data = {"from":account, "to":this.web3Instance.utils.toChecksumAddress(to), "tokens":tokens, "parent": parent, "type": 0};
+		let data = {"from":account, "to":this.web3Instance.utils.toChecksumAddress(to), "tokens":tokens, "parent": parent, "epoch": (await this.getCurrentEpoch()), "type": 0};
 		let strdata = JSON.stringify(data);
 		const hash = this.web3Instance.utils.soliditySha3(strdata);
 		const signature = await this.web3Instance.eth.personal.sign(strdata, account);
@@ -65,7 +69,7 @@ class Wallet {
 	async buildMiningTransaction(submittedBlock) {
 		const account = (await this.web3Instance.eth.getAccounts())[0];
 		const parent = (await getHeadTx(this.miningAccount.address));
-		let data = {"from":this.miningAccount.address, "to":this.miningAccount.address, "tokens":0, "blockData": submittedBlock, "parent": parent, "type": 1};
+		let data = {"from":this.miningAccount.address, "to":this.miningAccount.address, "tokens":0, "blockData": submittedBlock, "parent": parent, "epoch": (await this.getCurrentEpoch()), "type": 1};
 		let strdata = JSON.stringify(data);
 		const hash = this.web3Instance.utils.soliditySha3(strdata);
 		const signature = await this.miningAccount.sign(strdata).signature;
@@ -75,11 +79,11 @@ class Wallet {
 
 	async sendTransaction(signedTx) {
 		console.log(signedTx);
-		return (await (await fetch(`http://136.244.119.124:5005/send/rawtransaction/?tx=${signedTx}`)).json()).result;
+		return (await (await fetch(`https://siricoin-node-1.dynamic-dns.net:5005/send/rawtransaction/?tx=${signedTx}`)).json()).result;
 	}
 	
 	async getTransactionDetails(txid) {
-		const result = (await (await fetch(`http://136.244.119.124:5005/get/transactions/{txid}`)).json()).result;
+		const result = (await (await fetch(`https://siricoin-node-1.dynamic-dns.net:5005/get/transactions/{txid}`)).json()).result;
 		if result.length > 0 {
 			return result[0];
 		}
@@ -214,7 +218,7 @@ async function mining() {
 	return returnValue;
 }
 
-miner = new Miner("http://136.244.119.124:5005/")
+miner = new Miner("https://siricoin-node-1.dynamic-dns.net:5005")
 
 
 function addShare(hashrate) {
