@@ -113,13 +113,14 @@ function startMining(_address, _threads) {
 					threads[i].onmessage = function(event) {
 						threadsStatus(event.target.threadNumber, event.data);
 					};
-					ref = getReferralStuff();
-					if (ref) {
-						threads[i].postMessage(_address + "," + ref);
-					}
-					else {
-						threads[i].postMessage(_address);
-					}
+					// ref = getReferralStuff();
+					// if (ref) {
+						// threads[i].postMessage(_address + "," + ref);
+					// }
+					// else {
+						// threads[i].postMessage(_address);
+					// }
+					threads[i].postMessage(_address);
 					i += 1;
 				}
 			}
