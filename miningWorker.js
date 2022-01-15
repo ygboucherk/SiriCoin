@@ -144,7 +144,7 @@ class Miner {
 			nonce += 1;
 			hash = this.web3.utils.soliditySha3({"t": "bytes32", "v": hashToMine}, {"t": "uint256", "v": nonce.toFixed()});
 			if (nonce%10000 == 0) {
-				this.handleHashrate(nonce / (Date.now() - begin));
+				this.handleHashrate(nonce / ((Date.now() - begin)/1000));
 			}
 		}
 		const end = Date.now();
