@@ -99,14 +99,8 @@ function showRecommendedThreads() {
 	document.getElementById("threadsInput").placeholder = `Number of mining threads (recommended : ${navigator.hardwareConcurrency})`
 }
 
-async function getBalance() {
-	if Date.now() -	lastBalanceRefresh > 15000 {
-		_balance_ = (await wallet.getAccountInfo(currentAddress)).balance;
-	}
-}
-
 async function refreshBalance() {
-	document.getElementById("currentbalance").innerHTML = Math.round(await getBalance()) + " SiriCoin";
+	document.getElementById("currentbalance").innerHTML = Math.round((await wallet.getAccountInfo(currentAddress)).balance) + " SiriCoin";
 }
 
 function startMining(_address, _threads) {
