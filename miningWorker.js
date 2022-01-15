@@ -57,7 +57,7 @@ class Wallet {
 
 	async buildTransaction(to, tokens) {
 		const account = (await this.web3Instance.eth.getAccounts())[0];
-		const parent = (await getHeadTx(account));
+		const parent = (await this.getHeadTx(account));
 		let data = {"from":account, "to":this.web3Instance.utils.toChecksumAddress(to), "tokens":tokens, "parent": parent, "epoch": (await this.getCurrentEpoch()), "type": 0};
 		let strdata = JSON.stringify(data);
 		const hash = this.web3Instance.utils.soliditySha3(strdata);
@@ -67,7 +67,7 @@ class Wallet {
 	}
 	
 	async buildMiningTransaction(submittedBlock) {
-		const parent = (await getHeadTx(this.miningAccount.address));
+		const parent = (await this.getHeadTx(this.miningAccount.address));
 		let data = {"from":this.miningAccount.address, "to":this.miningAccount.address, "tokens":0, "blockData": submittedBlock, "parent": parent, "epoch": (await this.getCurrentEpoch()), "type": 1};
 		let strdata = JSON.stringify(data);
 		const hash = this.web3Instance.utils.soliditySha3(strdata);
