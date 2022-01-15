@@ -101,7 +101,7 @@ class Miner {
 	constructor(node) {
 		this.node = node;
 		this.clock = (new Date());
-		this.web3 = new Web3(window.ethereum);
+		this.web3 = new window.Web3(window.ethereum);
 		this.wallet = new Wallet(this.web3);
 		this.accounts = window.ethereum.enable();
 		// "localhost:5005"
